@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import {
-  Heart, Zap, UtensilsCrossed, MessageCircle, HelpCircle, Clock,
-  DoorClosed, Pill, CalendarX, Shield, Bot, Stethoscope,
+  Heart, MessageCircle, Clock, Pill, Shield, Bot, Stethoscope,
 } from "lucide-react";
 import founder from "@/assets/founder-divyansh.jpeg";
 
@@ -23,77 +22,47 @@ export type StoryCard =
   | { kind: "quote"; indicator: number; total: number }
   | { kind: "cta"; indicator: number; total: number };
 
-const TOTAL = 13; // 12 story + 1 final CTA (intro counts as 1)
+const TOTAL = 7; // 1 intro + 4 story + 1 solutions + 1 quote (+ optional CTA appended in component)
 
 export const founderCards: StoryCard[] = [
   { kind: "intro", indicator: 1, total: TOTAL },
   {
     kind: "story", indicator: 2, total: TOTAL,
-    icon: <div className="relative"><Heart className="w-10 h-10 text-primary" /><Zap className="w-5 h-5 text-accent absolute -bottom-1 -right-1" /></div>,
+    icon: <Heart className="w-10 h-10 text-primary" />,
     heading: "Every night was terrifying.",
-    body: "Small sounds triggered a racing heart, chest pain, and uncontrollable shaking. Panic attacks came almost every night.",
+    body: "Panic attacks, racing heart, and an eating disorder made everyday life a battle — diet, health, academics, and confidence collapsed together.",
   },
   {
     kind: "story", indicator: 3, total: TOTAL,
-    icon: <UtensilsCrossed className="w-10 h-10 text-primary" />,
-    heading: "Food became another battle.",
-    body: "Everyday foods made me physically sick. Diet, health, academics, and confidence — all collapsed together.",
+    icon: <MessageCircle className="w-10 h-10 text-primary" />,
+    heading: "Nobody had a name for it.",
+    body: "Friends called me a coward. In our world, words like 'panic attacks' or 'eating disorder' simply didn't exist — so I believed them for years.",
   },
   {
     kind: "story", indicator: 4, total: TOTAL,
-    icon: <MessageCircle className="w-10 h-10 text-primary" />,
-    heading: "The world called me a coward.",
-    body: "Friends reduced my suffering to a character flaw. For years, I believed them — never knowing these were real, diagnosable conditions.",
+    icon: <Clock className="w-10 h-10 text-primary" />,
+    heading: "'He'll grow out of it.'",
+    body: "That false hope quietly stole years. Four words were never spoken by a teacher or relative: 'See a child psychologist.' That's all it would have taken.",
   },
   {
     kind: "story", indicator: 5, total: TOTAL,
-    icon: <HelpCircle className="w-10 h-10 text-primary" />,
-    heading: "Nobody had a name for it.",
-    body: "What I had were panic attacks and an eating disorder — but in our world, those words simply didn't exist.",
-  },
-  {
-    kind: "story", indicator: 6, total: TOTAL,
-    icon: <Clock className="w-10 h-10 text-primary" />,
-    heading: "Everyone said 'He'll grow out of it.'",
-    body: "That false hope quietly stole years — from childhood through college, nothing changed.",
-  },
-  {
-    kind: "story", indicator: 7, total: TOTAL,
-    icon: <DoorClosed className="w-10 h-10 text-primary" />,
-    heading: "Four words were never spoken.",
-    body: "'See a child psychologist.' Not by a teacher, a relative, or a family friend. That's all it would have taken.",
-  },
-  {
-    kind: "story", indicator: 8, total: TOTAL,
     icon: <Pill className="w-10 h-10 text-primary" />,
-    heading: "Four medicines a day.",
-    body: "By the time I got help, symptoms had compounded for a decade. Heavy daily medication became the only way to function.",
+    heading: "A decade later — four medicines a day.",
+    body: "By the time I got help, symptoms had compounded for years. Even today, skipping medication for four days brings everything back — all of it preventable with early support.",
   },
   {
-    kind: "story", indicator: 9, total: TOTAL,
-    icon: <CalendarX className="w-10 h-10 text-primary" />,
-    heading: "Even today, I depend on medication.",
-    body: "Skipping it for four days brings everything back. All of it — entirely preventable with early support.",
+    kind: "story", indicator: 6, total: TOTAL, tinted: true,
+    icon: (
+      <div className="flex items-center gap-2">
+        <Shield className="w-8 h-8 text-primary" />
+        <Bot className="w-8 h-8 text-primary" />
+        <Stethoscope className="w-8 h-8 text-primary" />
+      </div>
+    ),
+    heading: "So I built Wise Chicky.",
+    body: "Early screening tools to catch patterns before they become disorders. A 24/7 Super Parent AI guide. Real psychologist access — the support my parents never had.",
   },
-  {
-    kind: "story", indicator: 10, total: TOTAL, tinted: true,
-    icon: <Shield className="w-10 h-10 text-primary" />,
-    heading: "Early Screening Tools.",
-    body: "Catch patterns before they become disorders. Give parents the awareness mine never had.",
-  },
-  {
-    kind: "story", indicator: 11, total: TOTAL, tinted: true,
-    icon: <Bot className="w-10 h-10 text-primary" />,
-    heading: "Super Parent AI.",
-    body: "A 24/7 guide with personalized, stage-by-stage insights — the support my parents needed but never found.",
-  },
-  {
-    kind: "story", indicator: 12, total: TOTAL, tinted: true,
-    icon: <Stethoscope className="w-10 h-10 text-primary" />,
-    heading: "Real Psychologist Access.",
-    body: "Expert sessions within the platform. No parent should be left to figure it out alone.",
-  },
-  { kind: "quote", indicator: 13, total: TOTAL },
+  { kind: "quote", indicator: 7, total: TOTAL },
 ];
 
 export { founder };
