@@ -17,14 +17,7 @@ const Index = () => {
 
   return (
     <main className="min-h-screen bg-background mx-auto max-w-[480px] relative">
-      {phase === "splash" && <Splash onDone={() => setPhase("onboarding")} />}
-
-      {phase === "onboarding" && (
-        <FounderStory
-          onComplete={() => setPhase("app")}
-          onSkip={() => setPhase("app")}
-        />
-      )}
+      {phase === "splash" && <Splash onDone={() => setPhase("app")} />}
 
       {phase === "app" && (
         <>
