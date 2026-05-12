@@ -1,40 +1,123 @@
 import PageHeader from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
-import { Brain, Sparkles, Activity, AlertCircle } from "lucide-react";
+import {
+  Brain,
+  Sparkles,
+  Activity,
+  AlertCircle,
+  User,
+  GraduationCap,
+  Smile,
+  Clock,
+} from "lucide-react";
 
-const assessments = [
+type Informant = "parent" | "teacher" | "child";
+
+interface Assessment {
+  id: string;
+  informant: Informant;
+  badge?: string;
+  icon: typeof Sparkles;
+  title: string;
+  desc: string;
+  duration: string;
+  age: string;
+  domains: string[];
+  cta: string;
+  href: string;
+}
+
+const informantMeta: Record<
+  Informant,
+  { label: string; sub: string; icon: typeof User; tone: string }
+> = {
+  parent: {
+    label: "Parent as informant",
+    sub: "You answer based on your child's behaviour over the last 4 weeks.",
+    icon: User,
+    tone: "bg-primary-soft text-primary",
+  },
+  teacher: {
+    label: "Teacher as informant",
+    sub: "Shareable with your child's class teacher for an outside perspective.",
+    icon: GraduationCap,
+    tone: "bg-accent-soft text-accent-foreground",
+  },
+  child: {
+    label: "Child self-report",
+    sub: "A gentle, gamified feelings check-in your child completes themselves.",
+    icon: Smile,
+    tone: "bg-[hsl(200_70%_94%)] text-foreground",
+  },
+};
+
+const assessments: Assessment[] = [
   {
-    id: "well",
+    id: "parent-wellbeing",
+    informant: "parent",
     badge: "Recommended",
     icon: Sparkles,
     title: "5-Domain Wellbeing Screening",
-    desc: "A parent-completed check-in across Emotional Wellbeing, Behavior, Attention, Mood and Social, and Safety.",
-    duration: "≈ 8 minutes",
-    age: "Ages 2–17",
+    desc: "A parent-completed check-in across Emotional Wellbeing, Behavior, Attention, Social, and Safety.",
+    duration: "≈ 10–15 min",
+    age: "Ages 0–17",
     domains: ["Emotional", "Behavior", "Attention", "Social", "Safety"],
     cta: "Start Screening",
+    href: "/assessments/parent-screening.html",
   },
   {
-    id: "adhd",
+    id: "parent-adhd",
+    informant: "parent",
     icon: Brain,
     title: "Attention & Behavior Screening",
-    desc: "Based on the NICHQ Vanderbilt scale. Screens for attention difficulties, hyperactivity, and related concerns.",
-    duration: "≈ 10 minutes",
+    desc: "Inspired by NICHQ Vanderbilt. Screens for attention difficulties, hyperactivity and related concerns.",
+    duration: "≈ 10 min",
     age: "Ages 6–12",
     domains: ["Attention", "Hyperactivity", "Behavior"],
     cta: "Start Screening",
+    href: "/assessments/parent-screening.html",
+  },
+  {
+    id: "teacher-screener",
+    informant: "teacher",
+    badge: "Send to Teacher",
+    icon: GraduationCap,
+    title: "Teacher Informant Screener",
+    desc: "Classroom-focused observations across attention, behaviour, peer interactions and learning.",
+    duration: "≈ 8 min",
+    age: "Ages 4–17",
+    domains: ["Classroom", "Peer", "Learning", "Behavior"],
+    cta: "Open Teacher Form",
+    href: "/assessments/teacher-screening.html",
+  },
+  {
+    id: "child-checkin",
+    informant: "child",
+    badge: "Kid-friendly",
+    icon: Smile,
+    title: "Feelings Check-in",
+    desc: "An animated, gamified self-report so your child can share how they're really feeling.",
+    duration: "≈ 5 min",
+    age: "Ages 6–14",
+    domains: ["Mood", "Worries", "Friends", "School"],
+    cta: "Start Check-in",
+    href: "/assessments/child-checkin.html",
   },
   {
     id: "milestones",
+    informant: "parent",
     icon: Activity,
     title: "Developmental Milestones Check",
-    desc: "Age-adaptive questions across language, motor, social, and cognitive areas.",
-    duration: "≈ 6 minutes",
+    desc: "Age-adaptive questions across language, motor, social and cognitive areas.",
+    duration: "≈ 6 min",
     age: "Ages 0–10",
     domains: ["Language", "Motor", "Social", "Cognitive"],
     cta: "Start Check",
+    href: "/assessments/parent-screening.html",
   },
 ];
+
+const order: Informant[] = ["parent", "teacher", "child"];
 
 const AssessmentsTab = () => {
   return (
@@ -61,59 +144,105 @@ const AssessmentsTab = () => {
         </div>
       </section>
 
-      <section className="px-5 mt-5 space-y-4">
-        {assessments.map((a, idx) => (
-          <article
-            key={a.id}
-            className="rounded-[24px] bg-card border border-card-border shadow-card p-5"
-          >
+      {/* Informant intro */}
+      <section className="px-5 mt-5">
+        <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
+          Choose informant
+        </p>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          The clearest picture comes from triangulating perspectives. Wise Chicky offers
+          assessments designed for parents, teachers, and children themselves.
+        </p>
+      </section>
+
+      {order.map((informant) => {
+        const meta = informantMeta[informant];
+        const items = assessments.filter((a) => a.informant === informant);
+        if (!items.length) return null;
+        const Icon = meta.icon;
+        return (
+          <section key={informant} className="px-5 mt-6">
             <div className="flex items-start gap-3 mb-3">
-              <div className="h-12 w-12 rounded-2xl bg-primary-soft flex items-center justify-center text-primary">
-                <a.icon className="h-6 w-6" />
+              <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${meta.tone}`}>
+                <Icon className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <div className="flex items-center gap-2 flex-wrap">
-                  {a.badge && (
-                    <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-pill bg-primary text-primary-foreground">
-                      {a.badge}
-                    </span>
-                  )}
-                  <span className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-pill bg-muted text-muted-foreground">
-                    {a.age}
-                  </span>
-                </div>
-                <h3 className="font-display text-[19px] leading-tight text-foreground mt-1.5">
-                  {a.title}
-                </h3>
+                <h2 className="font-display text-lg text-foreground leading-tight">
+                  {meta.label}
+                </h2>
+                <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug">
+                  {meta.sub}
+                </p>
               </div>
             </div>
 
-            <p className="text-sm text-muted-foreground leading-relaxed">{a.desc}</p>
+            <div className="space-y-3">
+              {items.map((a) => (
+                <article
+                  key={a.id}
+                  className="rounded-[22px] bg-card border border-card-border shadow-card p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="h-11 w-11 rounded-2xl bg-primary-soft flex items-center justify-center text-primary shrink-0">
+                      <a.icon className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {a.badge && (
+                          <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-pill bg-primary text-primary-foreground">
+                            {a.badge}
+                          </span>
+                        )}
+                        <span className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-pill bg-muted text-muted-foreground">
+                          {a.age}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-[17px] leading-tight text-foreground mt-1.5">
+                        {a.title}
+                      </h3>
+                    </div>
+                  </div>
 
-            <div className="flex flex-wrap gap-1.5 mt-3">
-              {a.domains.map((d) => (
-                <span key={d} className="text-[11px] font-medium px-2.5 py-1 rounded-pill bg-primary-soft text-primary">
-                  {d}
-                </span>
+                  <p className="text-[13px] text-muted-foreground leading-relaxed mt-3">
+                    {a.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {a.domains.map((d) => (
+                      <span
+                        key={d}
+                        className="text-[11px] font-medium px-2.5 py-0.5 rounded-pill bg-primary-soft text-primary"
+                      >
+                        {d}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between mt-4">
+                    <span className="text-[11px] text-muted-foreground inline-flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {a.duration}
+                    </span>
+                    <Button asChild className="rounded-xl h-10 px-4 text-sm">
+                      <a href={a.href} target="_blank" rel="noopener noreferrer">
+                        {a.cta}
+                      </a>
+                    </Button>
+                  </div>
+                </article>
               ))}
             </div>
-
-            <div className="flex items-center justify-between mt-4">
-              <span className="text-xs text-muted-foreground">{a.duration}</span>
-              <Button className="rounded-xl h-10 px-5 text-sm">{a.cta}</Button>
-            </div>
-          </article>
-        ))}
-      </section>
+          </section>
+        );
+      })}
 
       {/* Past results */}
       <section className="px-5 mt-7">
         <h2 className="font-display text-xl text-foreground mb-3">Your assessment results</h2>
         <div className="space-y-2.5">
           {[
-            { name: "Aarav", a: "5-Domain Wellbeing", date: "12 Mar 2026", level: "Monitor", color: "bg-accent text-accent-foreground" },
-            { name: "Riya", a: "5-Domain Wellbeing", date: "20 Feb 2026", level: "All Good", color: "bg-primary text-primary-foreground" },
-            { name: "Aarav", a: "Milestones Check", date: "04 Jan 2026", level: "All Good", color: "bg-primary text-primary-foreground" },
+            { name: "Aarav", a: "5-Domain Wellbeing (Parent)", date: "12 Mar 2026", level: "Monitor", color: "bg-accent text-accent-foreground" },
+            { name: "Aarav", a: "Teacher Screener", date: "08 Mar 2026", level: "Monitor", color: "bg-accent text-accent-foreground" },
+            { name: "Riya", a: "Feelings Check-in (Child)", date: "20 Feb 2026", level: "All Good", color: "bg-primary text-primary-foreground" },
           ].map((r, i) => (
             <div key={i} className="rounded-2xl bg-card border border-card-border p-4 flex items-center justify-between">
               <div>
