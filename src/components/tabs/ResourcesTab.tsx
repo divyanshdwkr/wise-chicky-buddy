@@ -1,10 +1,5 @@
 import PageHeader from "@/components/app/PageHeader";
 import { Search, Lightbulb, ArrowRight } from "lucide-react";
-import founder from "@/assets/founder-divyansh.jpeg";
-
-interface Props {
-  onOpenFounderStory: () => void;
-}
 
 const famous = [
   { name: "Aamir Khan", challenge: "Dyslexia awareness", color: "bg-[hsl(20_80%_94%)]" },
@@ -24,7 +19,7 @@ const articles = [
   { tag: "School", title: "Talking to teachers without labelling your child" },
 ];
 
-const ResourcesTab = ({ onOpenFounderStory }: Props) => {
+const ResourcesTab = () => {
   return (
     <div className="pb-6">
       <PageHeader
@@ -87,32 +82,6 @@ const ResourcesTab = ({ onOpenFounderStory }: Props) => {
             </article>
           ))}
         </div>
-      </section>
-
-      {/* Founder's story featured */}
-      <section className="px-5 mt-6">
-        <button
-          onClick={onOpenFounderStory}
-          className="w-full text-left rounded-[24px] bg-green-tint border border-primary/20 p-5 shadow-card hover:shadow-elevated transition"
-        >
-          <div className="flex items-center gap-4">
-            <div className="rounded-full p-1 bg-primary-gradient shrink-0">
-              <img src={founder} alt="Divyansh, Founder" className="h-16 w-16 rounded-full object-cover border-2 border-card" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-primary">Founder's Story</p>
-              <h3 className="font-display text-lg text-foreground leading-tight mt-0.5">
-                Why I Built Wise Chicky
-              </h3>
-            </div>
-          </div>
-          <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-            "I was that child nobody recognized in time. This is what I lived through — and why I'm fighting for your child."
-          </p>
-          <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary mt-3">
-            Read Full Story <ArrowRight className="h-3 w-3" />
-          </span>
-        </button>
       </section>
 
       {/* Personalized */}

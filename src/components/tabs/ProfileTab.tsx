@@ -5,10 +5,6 @@ import {
   Info, LogOut,
 } from "lucide-react";
 
-interface Props {
-  onOpenFounderStory: () => void;
-}
-
 const SettingsRow = ({
   icon: Icon, label, hint,
 }: { icon: any; label: string; hint?: string }) => (
@@ -35,7 +31,7 @@ const Group = ({ title, children }: { title: string; children: React.ReactNode }
   </section>
 );
 
-const ProfileTab = ({ onOpenFounderStory }: Props) => {
+const ProfileTab = () => {
   return (
     <div className="pb-6">
       <PageHeader title="Profile" hero />
@@ -91,19 +87,6 @@ const ProfileTab = ({ onOpenFounderStory }: Props) => {
         <SettingsRow icon={HelpCircle} label="Help Center" />
         <SettingsRow icon={Info} label="About Wise Chicky" />
       </Group>
-
-      <section className="mt-5 px-5">
-        <button
-          onClick={onOpenFounderStory}
-          className="w-full rounded-2xl bg-green-tint border border-primary/20 p-4 text-left"
-        >
-          <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Founder's Story</p>
-          <p className="text-sm font-semibold text-foreground mt-1">Read Divyansh's story</p>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            The reason Wise Chicky exists.
-          </p>
-        </button>
-      </section>
 
       <button className="w-full mt-6 py-4 text-sm font-semibold text-destructive inline-flex items-center justify-center gap-2">
         <LogOut className="h-4 w-4" /> Logout
