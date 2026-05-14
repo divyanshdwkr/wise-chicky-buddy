@@ -70,7 +70,7 @@ const Auth = () => {
           <img src={logo} alt="Wise Chicky" className="h-20 w-20 object-contain" />
           <h1 className="font-display text-2xl mt-3 text-foreground">Wise Chicky</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Understand your child early. Not medicate them late.
+            Catch it early. Change it forever.
           </p>
         </div>
 
