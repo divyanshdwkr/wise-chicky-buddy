@@ -32,7 +32,7 @@ const Splash = ({ onDone }: Props) => {
             phase >= 1 ? "opacity-100" : "opacity-0"
           }`}
         >
-          Understand your child early. Not medicate them late.
+          Catch it early. Change it forever.
         </p>
       </div>
     </div>
