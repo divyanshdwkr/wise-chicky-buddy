@@ -1,9 +1,7 @@
 import PageHeader from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
 import {
-  Brain,
   Sparkles,
-  Activity,
   AlertCircle,
   User,
   GraduationCap,
@@ -53,27 +51,15 @@ const informantMeta: Record<
 
 const assessments: Assessment[] = [
   {
-    id: "parent-wellbeing",
+    id: "parent-screening",
     informant: "parent",
     badge: "Recommended",
     icon: Sparkles,
-    title: "5-Domain Wellbeing Screening",
-    desc: "A parent-completed check-in across Emotional Wellbeing, Behavior, Attention, Social, and Safety.",
+    title: "Parent Screening Assessment",
+    desc: "A comprehensive parent-completed check-in to understand your child’s wellbeing across multiple domains.",
     duration: "≈ 10–15 min",
     age: "Ages 0–17",
     domains: ["Emotional", "Behavior", "Attention", "Social", "Safety"],
-    cta: "Start Screening",
-    href: "/assessments/parent-screening.html",
-  },
-  {
-    id: "parent-adhd",
-    informant: "parent",
-    icon: Brain,
-    title: "Attention & Behavior Screening",
-    desc: "Inspired by NICHQ Vanderbilt. Screens for attention difficulties, hyperactivity and related concerns.",
-    duration: "≈ 10 min",
-    age: "Ages 6–12",
-    domains: ["Attention", "Hyperactivity", "Behavior"],
     cta: "Start Screening",
     href: "/assessments/parent-screening.html",
   },
@@ -102,18 +88,6 @@ const assessments: Assessment[] = [
     domains: ["Mood", "Worries", "Friends", "School"],
     cta: "Start Check-in",
     href: "/assessments/child-checkin.html",
-  },
-  {
-    id: "milestones",
-    informant: "parent",
-    icon: Activity,
-    title: "Developmental Milestones Check",
-    desc: "Age-adaptive questions across language, motor, social and cognitive areas.",
-    duration: "≈ 6 min",
-    age: "Ages 0–10",
-    domains: ["Language", "Motor", "Social", "Cognitive"],
-    cta: "Start Check",
-    href: "/assessments/parent-screening.html",
   },
 ];
 
