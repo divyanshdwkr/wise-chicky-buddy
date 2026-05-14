@@ -1,9 +1,7 @@
 import PageHeader from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
 import {
-  Brain,
   Sparkles,
-  Activity,
   AlertCircle,
   User,
   GraduationCap,
